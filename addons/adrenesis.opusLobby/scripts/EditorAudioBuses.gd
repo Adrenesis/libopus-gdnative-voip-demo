@@ -26,6 +26,6 @@ func read_audioserver_buses(reset = true):
 			var idString = AudioServer.get_bus_name(i)
 			idString.erase(0, 6)
 			var _id = int(idString)
-			audioBusDisplayer.find_node("NameField").text = Network.player_nickname[_id]
+			audioBusDisplayer.find_node("NameField").text = Network.players_nickname[_id]
 		else:
 			audioBusDisplayer.find_node("NameField").text = AudioServer.get_bus_name(i)

@@ -102,6 +102,12 @@ func _on_nickname_changed(nickname):
 	if displayer:
 		displayer.nicknameField.text = nickname
 
+func _on_players_name_updated():
+	if displayer:
+		print("names_updating")
+		displayer.overlay.read_audioserver_buses(true)
+		displayer.advancedPanel.read_audioserver_buses(true)
+
 func _on_packet_sent(size):
 	send_to_logger("send recording of size %s" % size)
 

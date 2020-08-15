@@ -251,30 +251,33 @@ texture = ExtResource( 3 )
 
 [node name="OpusButton" type="Button" parent="."]
 margin_left = 68.0
-margin_top = 199.0
+margin_top = 207.0
 margin_right = 138.0
-margin_bottom = 265.0
+margin_bottom = 273.0
 script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="icon" type="Sprite" parent="."]
-position = Vector2( 104.306, 229.934 )
-scale = Vector2( 1.03905, 1.03905 )
+position = Vector2( 102.304, 242.936 )
+scale = Vector2( 0.976479, 0.976479 )
 skew = 4.37114e-08
 texture = ExtResource( 6 )
 
 [node name="OpusLobby" type="Button" parent="."]
-margin_left = 132.0
-margin_top = 160.0
-margin_right = 209.0
-margin_bottom = 245.0
+margin_left = 130.0
+margin_top = 176.0
+margin_right = 207.0
+margin_bottom = 254.0
 script = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="icon3" type="Sprite" parent="."]
-position = Vector2( 170.673, 201.301 )
-scale = Vector2( 1.14429, 1.14429 )
+position = Vector2( 170.342, 213.632 )
+scale = Vector2( 1.09215, 1.09215 )
 skew = 4.37114e-08
 texture = ExtResource( 2 )
 

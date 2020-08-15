@@ -81,6 +81,8 @@ func _ready():
 		error = Network.connect("client_failed", lobbyHolder, "_on_client_failed")
 	if not Network.is_connected("nickname_changed", lobbyHolder, "_on_nickname_changed"):
 		error = Network.connect("nickname_changed", lobbyHolder, "_on_nickname_changed")
+	if not Network.is_connected("players_name_updated", lobbyHolder, "_on_players_name_updated"):
+		error = Network.connect("players_name_updated", lobbyHolder, "_on_players_name_updated")
 	if not output.is_connected("packet_sent", lobbyHolder, "_on_packet_sent"):
 		error = output.connect("packet_sent", lobbyHolder, "_on_packet_sent")
 	if not output.is_connected("packet_received", lobbyHolder, "_on_packet_received"):
@@ -123,6 +125,8 @@ func _queue_free():
 		Network.disconnect("client_failed", lobbyHolder, "_on_client_failed")
 	if Network.is_connected("nickname_changed", lobbyHolder, "_on_nickname_changed"):
 		Network.disconnect("nickname_changed", lobbyHolder, "_on_nickname_changed")
+	if Network.is_connected("players_name_updated", lobbyHolder, "_on_players_name_updated"):
+		Network.disconnect("players_name_updated", lobbyHolder, "_on_players_name_updated")
 	if output.is_connected("packet_sent", lobbyHolder, "_on_packet_sent"):
 		output.disconnect("packet_sent", lobbyHolder, "_on_packet_sent")
 	if output.is_connected("packet_received", lobbyHolder, "_on_packet_received"):

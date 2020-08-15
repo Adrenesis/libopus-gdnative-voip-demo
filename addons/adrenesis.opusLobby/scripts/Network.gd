@@ -12,6 +12,7 @@ signal player_connected
 signal player_disconnected
 signal client_failed
 signal nickname_changed
+signal players_name_updated
 signal audio_buses_changed
 
 const OpusLobby = preload("res://addons/adrenesis.opusLobby/scenes/OpusLobby.tscn")
@@ -23,7 +24,7 @@ var lastId : int
 
 onready var output : AudioStreamPlayer
 var player_list = []
-var player_nickname = Dictionary()
+var players_nickname = Dictionary()
 var player_stream = Dictionary()
 
 var peer : NetworkedMultiplayerENet = null
@@ -72,12 +73,12 @@ func _server_disconnected():
 func stop_server():
 	remove_players()
 	peer.close_connection()
-	player_nickname.erase(1)
+	players_nickname.erase(1)
 	emit_signal("server_stopped")
 
 func start_server():
 	player_list.push_back(1)
-	player_nickname[1] = nickname
+	players_nickname[1] = nickname
 
 	peer = NetworkedMultiplayerENet.new()
 	var err = peer.create_server(serverPort, maxPlayers)
@@ -101,42 +102,46 @@ func _create_audio_bus_and_stream_player(name : String):
 	output.add_child(audioStreamPlayer)
 	emit_signal("audio_buses_changed")
 
-remote func _add_player(_id):
-	if player_list.find(_id) == -1:
-		
-		player_list.push_back(_id)
-		print("adding" + str(_id))
-		
-		if(_id != get_tree().get_network_unique_id()):
-			print("calling nickname of " + str(_id))
-			rpc_id(_id, "call_for_nickname", get_tree().get_network_unique_id())
-			
+func get_net_id():
+	return get_tree().get_network_unique_id()
+
+func is_server(_id = null):
+	if _id:
+		return _id == 1
+	else:
+		return get_net_id() == 1
+
+func is_this_instance(_id):
+	return _id == get_net_id()
 
 func check_and_reformulate_nickname(_originalNickname, _nickname, i = 0):
-	if player_nickname.values().find(_nickname) != -1:
+	if players_nickname.values().find(_nickname) != -1:
+		print("orginalNickname: " + _originalNickname)
 		print(_nickname)
 		return check_and_reformulate_nickname(_originalNickname, _originalNickname +" (" + str(i) + ")", i+1)
 	else:
 		return _nickname
 
-remote func answer_nickname(_id, _nickname):
-	var originalNickname
-	_nickname = check_and_reformulate_nickname(_nickname, _nickname)
-	print(_nickname)
-	print(_id)
-	rpc_id(_id, "confirm_nickname", _id, _nickname, get_tree().get_network_unique_id())
-	player_nickname[_id] = _nickname
-	
+remote func reset_names(_players_nickname):
+	players_nickname = _players_nickname
+	print("name updating signal emitting...")
+	emit_signal("players_name_updated")
 
-remote func confirm_nickname(_id, _nickname, _caller_id):
-	print("nickname confirmed of " + str(_id) + ": " + _nickname)
-	nickname = _nickname
-	emit_signal("nickname_changed", nickname)
-	rpc_id(_caller_id, "confirm_connection", _id, _nickname)
+remote func set_players(_player_list, _players_nickname):
+	players_nickname = _players_nickname
+	for player in _player_list:
+		print("updating players")
+		_add_player(player, false)
 
-remote func confirm_connection(_id, _nickname):
-	emit_signal("player_connected", _id, _nickname)
-	_create_audio_bus_and_stream_player("Player" + str(_id))
+remote func _add_player(_id, confirm = true):
+	if player_list.find(_id) == -1:
+		player_list.push_back(_id)
+		print("adding" + str(_id))
+		if _id != get_tree().get_network_unique_id() and confirm:
+			print("calling nickname of " + str(_id))
+			rpc_id(_id, "call_for_nickname", get_tree().get_network_unique_id())
+		if not confirm:
+			confirm_connection(_id, players_nickname[_id])
 
 remote func call_for_nickname(caller_id):
 	_add_player(1)
@@ -147,24 +152,44 @@ remote func call_for_nickname(caller_id):
 #		print("my id: " + str(get_tree().get_network_unique_id()))
 #		confirm_nickname(get_tree().get_network_unique_id(), nickname)
 #	else:
-	rpc_id(caller_id, "answer_nickname", get_tree().get_network_unique_id(), nickname)
+	rpc_id(caller_id, "answer_nickname", get_net_id(), nickname)
 
-remote func set_players(_player_list, _player_nickname):
-	for player in _player_list:
-#		pass
-		_add_player(player)
-	player_nickname = _player_nickname
+remote func answer_nickname(_id, _nickname):
+	if not is_server(_id) and is_server():
+		_nickname = check_and_reformulate_nickname(_nickname, _nickname)
+		print(_nickname)
+		print(_id)
+		rpc_id(_id, "confirm_nickname", _id, _nickname, get_net_id())
+		players_nickname[_id] = _nickname
+	else:
+		players_nickname[_id] = _nickname
+		confirm_connection(_id, _nickname)
+
+remote func confirm_nickname(_id, _nickname, _caller_id):
+	print("nickname confirmed of " + str(_id) + ": " + _nickname)
+	nickname = _nickname
+	emit_signal("nickname_changed", nickname)
+	rpc_id(_caller_id, "confirm_connection", _id, _nickname)
+
+remote func confirm_connection(_id, _nickname):
+	emit_signal("player_connected", _id, _nickname)
+	print("confirming connection")
+	if is_server():
+		print("as server")
+		rpc("reset_names", players_nickname)
+	players_nickname[_id] = _nickname
+	_create_audio_bus_and_stream_player("Player" + str(_id))
 
 func _player_connecting(_id):
 #	emit_signal("player_connected", _id, "000000")
 #	player_list.push_back(_id)
 	
 #	_create_audio_bus_and_stream_player("Player" + str(_id))
-	if (get_tree().get_network_unique_id() == 1):
+	if is_server():
 		rpc("_add_player", _id)
 		_add_player(_id)
-		rpc_id(_id, "_add_player", 1)
-		rpc_id(_id, "set_players", player_list, player_nickname)
+#		rpc_id(_id, "_add_player", 1)
+		rpc_id(_id, "set_players", player_list, players_nickname)
 #	for player in player_list:
 #		rpc("_add_player", player)
 	
@@ -180,27 +205,29 @@ func _destroy_bus_and_audio_stream_player(name : String):
 puppet func _remove_player(_id, source_id):
 #	print(_id)
 	if _id != source_id:
-		emit_signal("player_disconnected", _id, player_nickname[_id])
+		emit_signal("player_disconnected", _id, players_nickname[_id])
 		_destroy_bus_and_audio_stream_player("Player" + str(_id))
 		player_list.remove((player_list.find(_id)))
+		players_nickname.erase(_id)
+#		players_nickname.erase(_id)
 
 func remove_players():
 	print(player_list)
 	for player_index in range(player_list.size()):
 		var player = player_list[player_index]
 		if player != lastId:
-			emit_signal("player_disconnected", player, player_nickname[player])
+			emit_signal("player_disconnected", player, players_nickname[player])
 			_destroy_bus_and_audio_stream_player("Player" + str(player))
 #		player_list.remove(player_index)
 #		print("removed player" + str(player) + " at index " + str(player_index))
 	player_list = []
-	player_nickname = Dictionary()
+	players_nickname = Dictionary()
 		
 
 func _player_disconnecting(_id):
-	emit_signal("player_disconnected", _id, player_nickname[_id])
+	emit_signal("player_disconnected", _id, players_nickname[_id])
 #	player_list.remove((player_list.find(_id)))
 #	_destroy_bus_and_audio_stream_player("Player" + str(_id))
-	if get_tree().get_network_unique_id() == 1:
+	if is_server():
 		_remove_player(_id, get_tree().get_network_unique_id())
 		rpc("_remove_player", _id, get_tree().get_network_unique_id())
