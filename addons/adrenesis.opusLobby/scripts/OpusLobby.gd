@@ -15,6 +15,13 @@ enum {
 	STATUS_DISCONNECTED
 }
 
+func get_time_string():
+	var timeDict = OS.get_time()
+	var hour = timeDict.hour
+	var minute = timeDict.minute
+	var second = timeDict.second
+	return "[%02d:%02d:%02d] " % [hour, minute, second]
+
 func _process(delta):
 	if remove_display and not display_removed:
 		remove_child(displayer)
@@ -25,7 +32,7 @@ func _process(delta):
 
 func send_to_logger(message):
 	if logger:
-		logger.text += message + "\n"
+		logger.text += get_time_string() + message + "\n"
 	loggerLog += message + "\n"
 
 func update_status(message):
