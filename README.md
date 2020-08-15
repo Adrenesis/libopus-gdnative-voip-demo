@@ -1,8 +1,10 @@
-# godot-voip-opus-demo
-A very simple demo showing how to implement voip with libOpus compression
+# godot-voip-opus-demo EX
+A more complex demo showing how to implement voip with libOpus compression and audio bus management.
 
 The base of this project was copied from:
 https://github.com/cbarsugman/godot-voip-demo
+then from:
+https://github.com/Godot-Opus/libopus-gdnative-voip-demo
 
 ## Opus Compression
 Probably the biggest problem preventing VOIP from being implemented in Godot is the issue of compression.
@@ -12,6 +14,9 @@ In the original VOIP demo by cbarsugam, recorded audio is transmitted as raw PCM
 What this project does, is it used the [Godot-Opus wrapper](https://github.com/Godot-Opus/libopus-gdnative-asset) to compress the data before transmission, and on the receiving side decompress the data before playback.
 
 The compressed data is often more than 100 times smaller than the raw PCM data making this feasible for a real project.
+
+## Displayer
+The big update of this fork is his interface allowing to have sound of each player on separate audio bus, and the textual chat
 
 ## What this is not: Streaming audio
 This is a very simple form of VOIP. Press a button to record an audio sample. Only when the recording is completed is it compressed as a whole and sent to the remote clients. Then on the receiving end it is decompressed as a whole, and played back.
