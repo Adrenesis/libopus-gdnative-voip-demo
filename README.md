@@ -16,7 +16,24 @@ What this project does, is it used the [Godot-Opus wrapper](https://github.com/G
 The compressed data is often more than 100 times smaller than the raw PCM data making this feasible for a real project.
 
 ## Displayer
-The big update of this fork is his interface allowing to have sound of each player on separate audio bus, and the textual chat
+The big update of this fork is his interface allowing to have sound of each player on separate audio bus, with settings for each player and the textual chat.
+
+## Addon usage
+```
+Autoload Setup:
+    Go to project settings
+    Go to Autoload and load "/addons/adrenesis.opusLobby/Network.gd"
+```
+
+```
+Audio Bus Setup:
+    Go to Audio Bottom Panel
+    Add an AudioBus named "RecordLoopback"
+    Redirect that bus to "Master"
+    Add an AudioBus named "Record"
+    Add an AudioMicrophoneEffect on it
+    Redirect that bus to RecordLoopBack
+```
 
 ## What this is not: Streaming audio
 This is a very simple form of VOIP. Press a button to record an audio sample. Only when the recording is completed is it compressed as a whole and sent to the remote clients. Then on the receiving end it is decompressed as a whole, and played back.
