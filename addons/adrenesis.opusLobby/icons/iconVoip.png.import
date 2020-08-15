@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/audiometer.PNG-31b6cfbab7da45d1cd383ef0ee2be3a7.stex"
+path="res://.import/iconVoip.png-136a4e03d90359007cfeb4e4d4e42dbf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/audiometer.PNG"
-dest_files=[ "res://.import/audiometer.PNG-31b6cfbab7da45d1cd383ef0ee2be3a7.stex" ]
+source_file="res://addons/adrenesis.opusLobby/icons/iconVoip.png"
+dest_files=[ "res://.import/iconVoip.png-136a4e03d90359007cfeb4e4d4e42dbf.stex" ]
 
 [params]
 

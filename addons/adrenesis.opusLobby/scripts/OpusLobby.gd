@@ -1,5 +1,5 @@
 extends Node
-const OpusLobbyDisplayer = preload("res://scenes/OpusLobbyDisplayer.tscn")
+const OpusLobbyDisplayer = preload("res://addons/adrenesis.opusLobby/scenes/OpusLobbyDisplayer.tscn")
 var remove_display : bool = false
 var display_removed : bool = false
 var loggerLog : String = ""

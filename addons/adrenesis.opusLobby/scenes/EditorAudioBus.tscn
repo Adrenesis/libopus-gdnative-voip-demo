@@ -1,7 +1,9 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://icons/audiometer.PNG" type="Texture" id=1]
-[ext_resource path="res://scripts/EditorAudioBus.gd" type="Script" id=2]
+[ext_resource path="res://addons/adrenesis.opusLobby/icons/audiometer.PNG" type="Texture" id=1]
+[ext_resource path="res://addons/adrenesis.opusLobby/scripts/EditorAudioBus.gd" type="Script" id=2]
+
+
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AudioLevelProgress.png-3aa55edf64cd3982fd1e4f3426ceb4ac.stex"
+path="res://.import/icon.png-c0d90e5b3eb56085b61cec6816da2ef9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/AudioLevelProgress.png"
-dest_files=[ "res://.import/AudioLevelProgress.png-3aa55edf64cd3982fd1e4f3426ceb4ac.stex" ]
+source_file="res://addons/adrenesis.opusLobby/icons/icon.png"
+dest_files=[ "res://.import/icon.png-c0d90e5b3eb56085b61cec6816da2ef9.stex" ]
 
 [params]
 

@@ -1,17 +1,40 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://fonts/Hack_Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scripts/OpusLobbyDisplayer.gd" type="Script" id=4]
-[ext_resource path="res://scripts/TextChat.gd" type="Script" id=5]
-[ext_resource path="res://icons/iconGlow.png" type="Texture" id=6]
-[ext_resource path="res://scenes/EditorAudioBusesMini.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/EditorAudioBuses.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/adrenesis.opusLobby/icons/iconEX.png" type="Texture" id=2]
+[ext_resource path="res://addons/adrenesis.opusLobby/icons/iconVoip.png" type="Texture" id=3]
+[ext_resource path="res://addons/adrenesis.opusLobby/scripts/OpusLobbyDisplayer.gd" type="Script" id=4]
+[ext_resource path="res://addons/adrenesis.opusLobby/scripts/TextChat.gd" type="Script" id=5]
+[ext_resource path="res://addons/adrenesis.opusLobby/icons/iconGlow.png" type="Texture" id=6]
+[ext_resource path="res://addons/adrenesis.opusLobby/scenes/EditorAudioBusesMini.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/adrenesis.opusLobby/scenes/EditorAudioBuses.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 15
 extra_spacing_top = -1
 extra_spacing_bottom = -1
 font_data = ExtResource( 1 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Button
+
+func _pressed():
+	OS.shell_open(\"https://github.com/casbrugman/godot-voip-demo\")
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+
+func _pressed():
+	OS.shell_open(\"https://github.com/Godot-Opus/libopus-gdnative-voip-demo\")
+"
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Button
+
+func _pressed():
+	OS.shell_open(\"https://github.com/Adrenesis/libopus-gdnative-voip-demo\")
+"
 
 [node name="OpusLobbyDisplayer" type="Control"]
 anchor_right = 1.0
@@ -174,15 +197,15 @@ margin_right = 195.0
 margin_bottom = 173.0
 
 [node name="StatusLabel" type="Label" parent="ServerSettingsContainer/StatusContainer"]
-margin_right = 63.0
+margin_right = 7.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 custom_fonts/font = SubResource( 1 )
 text = "Status:"
 
 [node name="Status" type="Label" parent="ServerSettingsContainer/StatusContainer"]
-margin_left = 67.0
-margin_right = 175.0
+margin_left = 11.0
+margin_right = 23.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 custom_fonts/font = SubResource( 1 )
@@ -191,12 +214,6 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
-
-[node name="icon" type="Sprite" parent="ServerSettingsContainer"]
-position = Vector2( 99.2142, 229.842 )
-scale = Vector2( 1.44244, 1.44244 )
-skew = 4.37114e-08
-texture = ExtResource( 6 )
 
 [node name="Control" type="Control" parent="ServerSettingsContainer"]
 margin_top = 177.0
@@ -215,6 +232,51 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
+[node name="VOIPButton" type="Button" parent="."]
+margin_left = 13.0
+margin_top = 232.0
+margin_right = 72.0
+margin_bottom = 292.0
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon2" type="Sprite" parent="."]
+position = Vector2( 42.0412, 260.737 )
+scale = Vector2( 0.916286, 0.916286 )
+skew = 4.37114e-08
+texture = ExtResource( 3 )
+
+[node name="OpusButton" type="Button" parent="."]
+margin_left = 68.0
+margin_top = 199.0
+margin_right = 138.0
+margin_bottom = 265.0
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 104.306, 229.934 )
+scale = Vector2( 1.03905, 1.03905 )
+skew = 4.37114e-08
+texture = ExtResource( 6 )
+
+[node name="OpusLobby" type="Button" parent="."]
+margin_left = 132.0
+margin_top = 160.0
+margin_right = 209.0
+margin_bottom = 245.0
+script = SubResource( 4 )
+
+[node name="icon3" type="Sprite" parent="."]
+position = Vector2( 170.673, 201.301 )
+scale = Vector2( 1.14429, 1.14429 )
+skew = 4.37114e-08
+texture = ExtResource( 2 )
 
 [node name="LoggerColorRect" type="ColorRect" parent="."]
 show_behind_parent = true

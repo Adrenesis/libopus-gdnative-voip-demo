@@ -13,6 +13,7 @@ signal player_disconnected
 signal client_failed
 signal audio_buses_changed
 
+const OpusLobby = preload("res://addons/adrenesis.opusLobby/scenes/OpusLobby.tscn")
 var serverPort : int = 3000 
 var maxPlayers : int = 20 
 var serverIp : String = "127.0.0.1" 
@@ -30,7 +31,8 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 	get_tree().connect("connection_failed", self, "_connected_fail")
-	output = get_node('../OpusLobby/Output')
+	output = get_node('OpusLobby/Output')
+	add_child(OpusLobby.instance())
 
 func start_client():
 	peer = NetworkedMultiplayerENet.new()

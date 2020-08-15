@@ -1,7 +1,7 @@
 extends Control
 
 
-var AudioBusDisplay = preload("res://scenes/EditorAudioBus.tscn")
+var AudioBusDisplay = preload("res://addons/adrenesis.opusLobby/scenes/EditorAudioBus.tscn")
 var hboxContainer : HBoxContainer = null
 
 func _ready():

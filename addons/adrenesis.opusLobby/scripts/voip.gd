@@ -17,6 +17,12 @@ var opusDecoder
 
 func _ready():
 	mic = AudioServer.get_bus_effect(AudioServer.get_bus_index("Record"), 0)
+	if ! mic:
+		assert(false, 
+			"No AudioServer bus has been detected with the name 'Record'" +  
+			" and the effect 'AudioRecordEffect'.\n" +
+			"You can check /addons/adrenesis.opusLobby/default_bus_layout.tres for an example.\n" +
+			"Check your project setting (under Audio) to set default audio bus layout.")
 	logger = get_node("../OpusLobbyDisplayer/LoggerContainer/ScrollContainer/Log")
 	opusEncoder = get_node("../OpusEncoder")
 	opusDecoder = get_node("../OpusDecoder")

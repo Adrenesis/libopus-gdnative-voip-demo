@@ -1,7 +1,7 @@
 extends ScrollContainer
 
 
-var AudioBusDisplay = preload("res://scenes/EditorAudioBusMini.tscn")
+var AudioBusDisplay = preload("res://addons/adrenesis.opusLobby/scenes/EditorAudioBusMini.tscn")
 
 func read_audioserver_buses(reset = true):
 	if reset:

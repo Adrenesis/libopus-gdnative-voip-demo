@@ -1,10 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/OpusLobbyDisplayer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/adrenesis.opusLobby/scenes/OpusLobbyDisplayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/opus/OpusEncoderNode.gdns" type="Script" id=2]
 [ext_resource path="res://addons/opus/OpusDecoderNode.gdns" type="Script" id=3]
-[ext_resource path="res://scripts/OpusLobby.gd" type="Script" id=4]
-[ext_resource path="res://scripts/voip.gd" type="Script" id=5]
+[ext_resource path="res://addons/adrenesis.opusLobby/scripts/OpusLobby.gd" type="Script" id=4]
+[ext_resource path="res://addons/adrenesis.opusLobby/scripts/voip.gd" type="Script" id=5]
+
+
+
 
 [sub_resource type="AudioStreamSample" id=1]
 

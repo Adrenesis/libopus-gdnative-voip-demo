@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iconGlow.png-750bf5ae0a2dfae57359581929481dea.stex"
+path="res://.import/audiometer.PNG-1b2f779b37e80403792d05f7e95f3390.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/iconGlow.png"
-dest_files=[ "res://.import/iconGlow.png-750bf5ae0a2dfae57359581929481dea.stex" ]
+source_file="res://addons/adrenesis.opusLobby/icons/audiometer.PNG"
+dest_files=[ "res://.import/audiometer.PNG-1b2f779b37e80403792d05f7e95f3390.stex" ]
 
 [params]
 

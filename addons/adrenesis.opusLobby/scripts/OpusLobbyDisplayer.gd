@@ -21,6 +21,7 @@ func _ready():
 	lobbyHolder = get_parent()
 	output = lobbyHolder.get_node("Output")
 	input = lobbyHolder.get_node("Input")
+	
 	var serverSettingsContainer = get_node("ServerSettingsContainer")
 	statusNode = serverSettingsContainer.get_node("StatusContainer/Status")
 	buttonVoice = serverSettingsContainer.get_node("ButtonVoice")

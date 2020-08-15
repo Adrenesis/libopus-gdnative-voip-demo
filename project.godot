@@ -16,16 +16,17 @@ _global_script_class_icons={
 [application]
 
 config/name="Opus Voip demo"
-run/main_scene="res://scenes/OpusLobby.tscn"
+run/main_scene="res://Test.tscn"
 config/icon="res://icons/icon.png"
 
 [audio]
 
+default_bus_layout="res://addons/adrenesis.opusLobby/default_bus_layout.tres"
 enable_audio_input=true
 
 [autoload]
 
-Network="*res://scripts/Network.gd"
+Network="*res://addons/adrenesis.opusLobby/scripts/Network.gd"
 
 [editor_plugins]
 
