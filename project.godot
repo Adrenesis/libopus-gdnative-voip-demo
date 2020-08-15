@@ -16,8 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Opus Voip demo"
-run/main_scene="res://Control.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/OpusLobby.tscn"
+config/icon="res://icons/icon.png"
 
 [audio]
 
@@ -25,11 +25,11 @@ enable_audio_input=true
 
 [autoload]
 
-Network="*res://Network.gd"
+Network="*res://scripts/Network.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "opus" )
+enabled=PoolStringArray( "opus", "zylann.editor_debugger" )
 
 [rendering]
 
