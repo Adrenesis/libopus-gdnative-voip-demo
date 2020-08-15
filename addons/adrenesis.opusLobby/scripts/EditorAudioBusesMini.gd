@@ -8,11 +8,17 @@ func read_audioserver_buses(reset = true):
 		for child in $VBoxContainer.get_children():
 			$VBoxContainer.remove_child(child)
 			child.queue_free()
-		print("reseted")
+#		print("reseted")
 	for i in range(0, AudioServer.get_bus_count()):
 		var audioBusDisplayer = AudioBusDisplay.instance()
 		
 		audioBusDisplayer.busId = i
 		$VBoxContainer.add_child(audioBusDisplayer)
 		audioBusDisplayer.inputNode = get_parent().input
-		audioBusDisplayer.find_node("NameField").text = AudioServer.get_bus_name(i)
+		if AudioServer.get_bus_name(i).begins_with("Player"):
+			var idString = AudioServer.get_bus_name(i)
+			idString.erase(0, 6)
+			var _id = int(idString)
+			audioBusDisplayer.find_node("NameField").text = Network.player_nickname[_id]
+		else:
+			audioBusDisplayer.find_node("NameField").text = AudioServer.get_bus_name(i)

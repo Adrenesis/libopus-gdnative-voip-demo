@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Opus Voip demo"
 run/main_scene="res://Test.tscn"
-config/icon="res://icons/icon.png"
+config/icon="res://addons/adrenesis.opusLobby/icons/iconEX.png"
 
 [audio]
 

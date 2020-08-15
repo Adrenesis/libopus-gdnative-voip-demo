@@ -22,4 +22,10 @@ func read_audioserver_buses(reset = true):
 		hboxContainer.add_child(audioBusDisplayer)
 		audioBusDisplayer.inputNode = get_parent().input
 		print(get_parent().input)
-		audioBusDisplayer.find_node("NameField").text = AudioServer.get_bus_name(i)
+		if AudioServer.get_bus_name(i).begins_with("Player"):
+			var idString = AudioServer.get_bus_name(i)
+			idString.erase(0, 6)
+			var _id = int(idString)
+			audioBusDisplayer.find_node("NameField").text = Network.player_nickname[_id]
+		else:
+			audioBusDisplayer.find_node("NameField").text = AudioServer.get_bus_name(i)

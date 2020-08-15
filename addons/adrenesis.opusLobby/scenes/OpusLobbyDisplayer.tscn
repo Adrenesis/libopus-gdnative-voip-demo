@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://fonts/Hack_Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://addons/adrenesis.opusLobby/fonts/Hack_Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://addons/adrenesis.opusLobby/icons/iconEX.png" type="Texture" id=2]
 [ext_resource path="res://addons/adrenesis.opusLobby/icons/iconVoip.png" type="Texture" id=3]
 [ext_resource path="res://addons/adrenesis.opusLobby/scripts/OpusLobbyDisplayer.gd" type="Script" id=4]
@@ -197,15 +197,15 @@ margin_right = 195.0
 margin_bottom = 173.0
 
 [node name="StatusLabel" type="Label" parent="ServerSettingsContainer/StatusContainer"]
-margin_right = 7.0
+margin_right = 63.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 custom_fonts/font = SubResource( 1 )
 text = "Status:"
 
 [node name="Status" type="Label" parent="ServerSettingsContainer/StatusContainer"]
-margin_left = 11.0
-margin_right = 23.0
+margin_left = 67.0
+margin_right = 175.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 custom_fonts/font = SubResource( 1 )

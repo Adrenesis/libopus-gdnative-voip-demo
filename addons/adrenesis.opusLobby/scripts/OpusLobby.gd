@@ -65,7 +65,7 @@ func _on_server_disconnected():
 		displayer.enable_server_settings()
 
 func _on_server_failed():
-	send_to_logger("Failed to create server0!")
+	send_to_logger("Failed to create server!")
 	update_status("Error.")
 	status = STATUS_DISCONNECTED
 	if displayer:
@@ -85,11 +85,11 @@ func _on_server_stopped():
 	if displayer:
 		displayer.buttonVoice.disabled = true
 
-func _on_player_connected(id):
-	send_to_logger("Player with id: %s connected" % id)
+func _on_player_connected(id, nickname):
+	send_to_logger("Player %s with id %s connected" % [ nickname, id ])
 
-func _on_player_disconnected(id):
-	send_to_logger("Player with id: %s disconnected" % id)
+func _on_player_disconnected(id, nickname):
+	send_to_logger("Player %s with id %s disconnected" % [ nickname, id ])
 
 func _on_client_failed():
 	update_status("Error.")
@@ -97,6 +97,10 @@ func _on_client_failed():
 	status = STATUS_DISCONNECTED
 	if displayer:
 		displayer.enable_server_settings()
+
+func _on_nickname_changed(nickname):
+	if displayer:
+		displayer.nicknameField.text = nickname
 
 func _on_packet_sent(size):
 	send_to_logger("send recording of size %s" % size)
