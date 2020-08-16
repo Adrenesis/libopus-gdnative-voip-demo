@@ -28,7 +28,7 @@ func _ready():
 	opusDecoder = get_node("../OpusDecoder")
 
 remote func _play(id, opusPackets, format, mix_rate, stereo):
-	emit_signal("packet_received")
+	emit_signal("packet_received", id)
 	# Decode the incoming packets into raw PCM data
 	var pcmData = opusDecoder.decode(opusPackets)
 	var audioStream = AudioStreamSample.new()

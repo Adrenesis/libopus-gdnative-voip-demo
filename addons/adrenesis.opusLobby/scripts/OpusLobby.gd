@@ -44,7 +44,7 @@ func _on_client_started():
 	update_status("Connecting...")
 	send_to_logger("Trying to connect...")
 	status = STATUS_DISCONNECTED
-	displayer.buttonVoice.disabled = false
+	
 
 func _on_client_stopped():
 	update_status("Not Started.")
@@ -56,6 +56,7 @@ func _on_connected_successfully():
 	send_to_logger("Connected.")
 	update_status("Connected OK!")
 	status = STATUS_CLIENT
+	displayer.buttonVoice.disabled = false
 
 func _on_connection_failed():
 	send_to_logger("Failed to connect.")

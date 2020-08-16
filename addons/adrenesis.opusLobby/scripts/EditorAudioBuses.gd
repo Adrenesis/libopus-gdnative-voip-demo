@@ -14,14 +14,14 @@ func read_audioserver_buses(reset = true):
 		for child in hboxContainer.get_children():
 			hboxContainer.remove_child(child)
 			child.queue_free()
-		print("reseted")
+		# print("reseted")
 	for i in range(0, AudioServer.get_bus_count()):
 		var audioBusDisplayer = AudioBusDisplay.instance()
 		
 		audioBusDisplayer.busId = i
 		hboxContainer.add_child(audioBusDisplayer)
 		audioBusDisplayer.inputNode = get_parent().input
-		print(get_parent().input)
+		# print(get_parent().input)
 		if AudioServer.get_bus_name(i).begins_with("Player"):
 			var idString = AudioServer.get_bus_name(i)
 			idString.erase(0, 6)
