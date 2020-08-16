@@ -1,5 +1,6 @@
 extends Node
 const OpusLobbyDisplayer = preload("res://addons/adrenesis.opusLobby/scenes/OpusLobbyDisplayer.tscn")
+export (bool) var enable_hotkeys
 var remove_display : bool = false
 var display_removed : bool = false
 var loggerLog : String = ""
